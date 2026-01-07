@@ -7,6 +7,12 @@ $userName = $_POST['userName'];
 $pass = $_POST['password'];
 $repPass = $_POST['repPassword'];
 
+if (empty($email) || empty($userName) || empty($pass) || empty($repPass)) {
+  http_response_code(400);
+  echo json_encode(array('error' => 'Empty data'));
+  return;
+}
+
 $checkUser = "SELECT * FROM users WHERE email = '$email'";
 
 $result = $conn->query($checkUser);
@@ -40,12 +46,27 @@ if (empty($email) || empty($userName) || empty($pass) || empty($repPass)) {
   return;
 }
 
+//generowanie tokenu
+
+$expired_token = '';
+$long_date_token = '';
+
+
+$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+for ($i = 0; $i <= 60; $i++) {
+  $expired_token .= $characters[rand(0, strlen($characters) - 1)];
+  $long_date_token .= $characters[rand(0, strlen($characters) - 1)];
+}
+
+//TODO: insert token with user id;
+$insertToken = "";
+
 $addUser = "INSERT INTO users (nickname, email, password_hash) VALUES ('$userName', '$email', '$passHash')";
 
 if ($conn->query($addUser)) {
   echo json_encode(array('success' => "User succesfully created"));
   return;
 }
-
 
 $conn->close();

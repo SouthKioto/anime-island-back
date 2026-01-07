@@ -3,7 +3,7 @@
 @include 'connect.php';
 @include 'oAutch/oAutch.php';
 
-// TODO: Add oAutch token
+//TODO: dodac generowanie tokenow
 
 $login = $_POST['login'];
 $password = $_POST['password'];
@@ -32,7 +32,6 @@ $user_data = array(
   'nickname' => $row->nickname,
   'email' => $row->email,
 );
-
 
 echo json_encode(array('success' => "Successfully login", "user_data" => $user_data));
 
