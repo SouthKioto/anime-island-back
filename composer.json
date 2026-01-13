@@ -1,0 +1,17 @@
+{
+    "name": "kioto/anime-island-back",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Bartlomiej Bolisega",
+            "email": "bolisegabartek6@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpstan/phpstan": "^2.1"
+    }
+}
